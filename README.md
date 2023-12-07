@@ -1,8 +1,6 @@
 # JavaScript Temelleri
 
 ## Array Metodları ve Callback'ler
-*DİKKAT*: Lütfen LIVE server extension'ını VS Code'a kurunuz': https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
-  
 ## Giriş
 Yazılımcılar olarak çalıştığmız projelerde sıkça JSON verilerini serverlar ile iletişimde, verileri özetlemede, imajları sayfamıza almada ve daha bir çok işte kullanırız. Bu tarz yapıları ne erkenden öğrenmek bize çok fayda sağlayacak.
 
