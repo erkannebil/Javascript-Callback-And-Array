@@ -1,18 +1,7 @@
 # JavaScript Temelleri
 
-## İleri JavaScript
-
 ## Array Metodları ve Callback'ler
-*DİKKAT*: Lütfen LIVE server extension'ını VS Code'a kurunuz': https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
-
-## Amaçlar
-
-- Array Metodları - `.forEach()` `.map()` `.reduce()` `.filter()` kullanın ve pratik edin
-- Callback'ler - bir fonksiyonu diğer bir fonksiyona parametre olarak göndermeyi pratik edin
-
-  
 ## Giriş
-
 Yazılımcılar olarak çalıştığmız projelerde sıkça JSON verilerini serverlar ile iletişimde, verileri özetlemede, imajları sayfamıza almada ve daha bir çok işte kullanırız. Bu tarz yapıları ne erkenden öğrenmek bize çok fayda sağlayacak.
 
 Bu projede 1930-2014 arasında oynana Dünya Kupası verilerini kullanacağız.
@@ -20,10 +9,6 @@ Bu projede 1930-2014 arasında oynana Dünya Kupası verilerini kullanacağız.
 Verilen veri seti (`index.js`nin ilk satırında yükleniyor) 1930 sonrası oynanan tüm FIFA FDünya Kupası maçlarının raporunu içeriyor. Her bir raporda birçok başlık altında bilgiler var: `Year`,`Stage`, `Stadium`,  `Home Team Name`,`Home Team Goals`, `Away Team Name`, ve `Away Team Goals`. 
 
 Bugünkü amacınız elinzideki veri setini kullanarak ilgi çekici istatistikler elde etmek.
-
-### Commits
-
-Görevleri yaptıkça commit etmeyi unutmayınız.
 
 ### Örnek Data
 
@@ -108,10 +93,3 @@ Win conditions": "France win on penalties (3 - 4)",
 [What the Heck is a Callback?](https://codeburst.io/javascript-what-the-heck-is-a-callback-aba4da2deced)
 
 [Working with JSON in JavaScript](https://www.ma-no.org/en/programming/javascript/working-with-json-in-javascript)
-
-
-## Proje Teslim Etme Adımları
-
-Verilen görevi tamamladıktan sonra [Workintech Platformu](https://app.workintech.com.tr)'nda (app.workintech.com.tr) `Sprint 2>Gün 2`'nin sonuna eklenmiş olan "` Görev: Sprint 2'nin 2. Gün projesini buraya yükle`" içeriğini açıp. GitHub hesabınızda oluşturduğunuz repo'nun adresini buraya ekleyiniz. 
-
-
