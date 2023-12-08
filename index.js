@@ -74,7 +74,9 @@ function Finaller(dizi) {
 	function Kazananlar(dizi, Finaller) {
 		const finalMatchData = Finaller(dizi);
 		const kazananlar = [];
-		finalMatchData.forEach(match => {
+	
+		for (let i = 0; i < finalMatchData.length; i++) {
+			const match = finalMatchData[i];
 			const homeTeamGoals = match["Home Team Goals"];
 			const awayTeamGoals = match["Away Team Goals"];
 	
@@ -83,10 +85,10 @@ function Finaller(dizi) {
 			} else if (awayTeamGoals > homeTeamGoals) {
 				kazananlar.push(match["Away Team Name"]);
 			}
-		});
+		}
+	
 		return kazananlar;
 	}
-	
 
 /*  Görev 5: 
 	Bir higher-order fonksiyonu olan YillaraGoreKazananlar isimli fonksiyona aşağıdakileri uygulayın:
@@ -99,14 +101,25 @@ function Finaller(dizi) {
 	💡 İPUCU: her cümlenin adım 4'te belirtilen cümleyle birebir aynı olması gerekmektedir.
 */
 
-function YillaraGoreKazananlar(/* kodlar buraya */) {
+function YillaraGoreKazananlar(fifaData, cb, cb2, cb3) {
 	
-/* kodlar buraya */
+    const finalMatches = cb(fifaData);	
+    const years = cb2(finalMatches, cb);
+    const winners = cb3(finalMatches, cb);
 
+    const sentences = [];
+
+    for (let i = 0; i < years.length; i++) {
+        const year = years[i];
+        const winner = winners[i];
+        const sentence = `${year} yılında, ${winner} dünya kupasını kazandı!`;
+        sentences.push(sentence);
+    }
+    return sentences;
 }
 
 
-/*  Görev 6: 
+/*  Görev 6: ????????????????????????????????????????????????????????????????*
 	Bir higher order fonksiyonu olan `OrtalamaGolSayisi` isimli fonksiyona aşağıdakileri uygulayın: 
 	1. Görev 2'de yazdığınız `Finaller` fonksiyonunu birinci parametre olarak alacak; 'fifaData' dizisini argüman olarak eklediğinizden emin olun
 	
@@ -120,12 +133,18 @@ function YillaraGoreKazananlar(/* kodlar buraya */) {
 	
 */
 
-function OrtalamaGolSayisi(/* kodlar buraya */) {
-	
-    /* kodlar buraya */
-	
-}
+function OrtalamaGolSayisi(fifaData) {
 
+    const finalMatches = Finaller(fifaData);
+	
+    const totalGoals = finalMatches.reduce((acc, match) => {
+        const homeGoals = match.HomeTeamGoals;
+        const awayGoals = match.AwayTeamGoals;
+        return acc + homeGoals + awayGoals;
+    }, 0);
+    const averageGoals = (totalGoals / finalMatches.length).toFixed(2);
+    return parseInt(averageGoals);
+}
 
 
 /// EKSTRA ÇALIŞMALAR ///
@@ -136,31 +155,89 @@ function OrtalamaGolSayisi(/* kodlar buraya */) {
 	İpucu: "takım kısaltmaları" (team initials) için datada araştırma yapın!
 İpucu: `.reduce` Kullanın*/
 
-function UlkelerinKazanmaSayilari(/* kodlar buraya */) {
-	
-    /* kodlar buraya */
-	
+function UlkelerinKazanmaSayilari(data, takimKisaltmalari) {
+    return data.reduce((kazanmaSayilari, match) => {
+        const homeTeam = match.HomeTeam;
+        const awayTeam = match.AwayTeam;
+        
+        if (match.Stage === 'Final' && match.Winner !== '') {
+            const kazanan = match.Winner;
+            
+            if (!kazanmaSayilari[kazanan]) {
+                kazanmaSayilari[kazanan] = 1;
+            } else {
+                kazanmaSayilari[kazanan]++;
+            }
+        }
+        
+        return kazanmaSayilari;
+    }, {});
 }
-
-
 
 /*  BONUS 2:  
 EnCokGolAtan() isminde bir fonksiyon yazın, `data` yı parametre olarak alsın ve Dünya kupası finallerinde en çok gol atan takımı döndürsün */
 
-function EnCokGolAtan(/* kodlar buraya */) {
-	
-    /* kodlar buraya */
-	
+function EnCokGolAtan(data) {
+    const goalCounts = {};
+
+    data.forEach((match) => {
+        const homeTeam = match.HomeTeam;
+        const awayTeam = match.AwayTeam;
+        const homeGoals = match.HomeTeamGoals;
+        const awayGoals = match.AwayTeamGoals;
+
+        if (goalCounts[homeTeam]) {
+            goalCounts[homeTeam] += homeGoals;
+        } else {
+            goalCounts[homeTeam] = homeGoals;
+        }
+
+        if (goalCounts[awayTeam]) {
+            goalCounts[awayTeam] += awayGoals;
+        } else {
+            goalCounts[awayTeam] = awayGoals;
+        }
+    });
+
+    const mostGoalsTeam = Object.keys(goalCounts).reduce((mostGoalsTeam, team) => {
+        return goalCounts[team] > goalCounts[mostGoalsTeam] ? team : mostGoalsTeam;
+    }, Object.keys(goalCounts)[0]);
+
+    return mostGoalsTeam;
 }
+
 
 
 /*  BONUS 3: 
 EnKotuDefans() adında bir fonksiyon yazın, `data` yı parametre olarak alsın ve Dünya kupasında finallerinde en çok golü yiyen takımı döndürsün*/
 
-function EnKotuDefans(/* kodlar buraya */) {
-	
-    /* kodlar buraya */
-	
+function EnKotuDefans(data) {
+    const goalCounts = {};
+
+    data.forEach((match) => {
+        const homeTeam = match.HomeTeam;
+        const awayTeam = match.AwayTeam;
+        const homeGoals = match.HomeTeamGoals;
+        const awayGoals = match.AwayTeamGoals;
+
+        if (goalCounts[homeTeam]) {
+            goalCounts[homeTeam] += awayGoals;
+        } else {
+            goalCounts[homeTeam] = awayGoals;
+        }
+
+        if (goalCounts[awayTeam]) {
+            goalCounts[awayTeam] += homeGoals;
+        } else {
+            goalCounts[awayTeam] = homeGoals;
+        }
+    });
+
+    const worstDefenseTeam = Object.keys(goalCounts).reduce((worstDefenseTeam, team) => {
+        return goalCounts[team] > goalCounts[worstDefenseTeam] ? team : worstDefenseTeam;
+    }, Object.keys(goalCounts)[0]);
+
+    return worstDefenseTeam;
 }
 
 
